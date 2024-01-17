@@ -13,6 +13,8 @@ class DatabaseHelper
     let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     static var databaseObject = DatabaseHelper()
     
+    
+    //MARK: - addDataToCoreData
     func addDataToCoreData(obj: [String: String]){
         let mobileData = NSEntityDescription.insertNewObject(forEntityName: "Mobile", into: context!) as! Mobile
         mobileData.company = obj["company"]
@@ -26,6 +28,7 @@ class DatabaseHelper
         }
     }
     
+    //MARK: - getDataFromCoreData
     func getDataFromCoreData() -> [Mobile]? {
         var mobileInfo = [Mobile]()
         let request = NSFetchRequest<NSManagedObject>(entityName: "Mobile")
@@ -39,6 +42,8 @@ class DatabaseHelper
         }
     }
     
+    
+    //MARK: - deleteDataFromCoreData
     func deleteDataFromCoreData(index: Int) -> [Mobile]?{
         var mobile = getDataFromCoreData()
         context?.delete(mobile![index])

@@ -27,9 +27,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell") as? DetailTableViewCell
-        cell?.companyLabel.text = mobileArray[indexPath.row].company
-        cell?.modelLabel.text = mobileArray[indexPath.row].model
-        cell?.priceLabel.text = mobileArray[indexPath.row].price
+        cell?.mobile = mobileArray[indexPath.row]
         return cell!
     }
     

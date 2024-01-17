@@ -13,6 +13,14 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var modelLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     
+    var mobile : Mobile! {
+        didSet{
+            companyLabel.text = mobile.company
+            modelLabel.text = mobile.model
+            priceLabel.text = mobile.price
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
        
