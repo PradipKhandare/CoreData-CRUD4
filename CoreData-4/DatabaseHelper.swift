@@ -56,4 +56,17 @@ class DatabaseHelper
             return nil
         }
     }
+    
+    func updateDatainCoreData(object: [String: String], i: Int){
+        var mobile = getDataFromCoreData()
+        mobile![i].company = object["company"]
+        mobile![i].model = object["model"]
+        mobile![i].price = object["price"]
+        
+        do {
+            try context?.save()
+        }catch {
+            print("Data not updated successfully.")
+        }
+    }
 }

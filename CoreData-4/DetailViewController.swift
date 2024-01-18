@@ -7,10 +7,16 @@
 
 import UIKit
 
+protocol AddData{
+    
+    func data(object: [String: String], index: Int, isEdit: Bool)
+}
+
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var mobileArray = [Mobile]()
+    var delegate: AddData!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +50,15 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate
             mobileArray = DatabaseHelper.databaseObject.deleteDataFromCoreData(index: indexPath.row)!
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let dict = ["company": mobileArray[indexPath.row].company,
+                    "model": mobileArray[indexPath.row].model,
+                    "price": mobileArray[indexPath.row].price]
+        delegate.data(object: dict as! [String: String], index: indexPath.row, isEdit: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
 }
